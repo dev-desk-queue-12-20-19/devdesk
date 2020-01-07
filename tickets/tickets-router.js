@@ -10,16 +10,7 @@ const restricted = require("../auth/restricted-middleware");
 
 const { helper, student } = require("../auth/permission");
 
-// router.post("/", restricted, (req, res) => {
-//   console.log(req.body);
-//   Tickets.add(req.body)
-//     .then(newTicket => {
-//       res.status(201).json(newTicket);
-//     })
-//     .catch(err => {
-//       res.status(500).json({ error: "failed to add ticket" });
-//     });
-// });
+
 
 router.get("/", (req, res) => {
   Tickets.find()
@@ -36,9 +27,6 @@ router.post("/", restricted, student, async (req, res) => {
       .map(i => i.name);
 
     const tick = await Tickets.add(req.body);
-
-    console.log(cat.filter(i => i === req.body.categories));
-    console.log(req.body.categories);
 
     res.status(200).json({
       message: "ticket successfully added"
