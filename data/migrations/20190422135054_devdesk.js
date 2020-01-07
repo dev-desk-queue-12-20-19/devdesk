@@ -14,6 +14,13 @@ exports.up = knex =>
       table.string("role", 50).defaultTo("student");
       table.timestamps(true, true);
     })
+    .createTable("categories", table => {
+      table.increments();
+      table
+        .string("name", 128)
+        .notNullable()
+        .unique();
+    })
     .createTable("tickets", table => {
       table.increments();
       table.string("status", 128).notNullable();
@@ -29,13 +36,6 @@ exports.up = knex =>
       table.foreign("helper_id").references("users.id");
       table.string("categories").references("categories.name");
       table.timestamps(true, true);
-    })
-    .createTable("categories", table => {
-      table.increments();
-      table
-        .string("name", 128)
-        .notNullable()
-        .unique();
     })
     .createTable("roles", table => {
       table.increments();
