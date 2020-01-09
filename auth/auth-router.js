@@ -64,7 +64,8 @@ router.get("/roles", restricted, (req, res) => {
 function generateToken(user) {
   const payload = {
     subject: user.id, // subject in payload is what the token is about
-    username: user.username
+    username: user.username,
+    role: user.role
     // ...otherData
   };
 
